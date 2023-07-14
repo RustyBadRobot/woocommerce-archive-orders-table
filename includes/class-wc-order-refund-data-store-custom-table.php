@@ -35,7 +35,7 @@ class WC_Order_Refund_Data_Store_Custom_Table extends WC_Order_Refund_Data_Store
 
 			// Loop over internal postmeta properties.
 			foreach ( WooCommerce_Custom_Orders_Table::get_postmeta_mapping() as $key => $value ) {
-				$data[ $key ] = get_post_meta( $id, $value, true );
+				$data[ $key ] = wc_get_order_item_meta( $id, $value, true );
 			}
 
 			// Get post for additional notes passed by the customer.
@@ -167,7 +167,7 @@ class WC_Order_Refund_Data_Store_Custom_Table extends WC_Order_Refund_Data_Store
 
 		if ( true === $delete ) {
 			foreach ( WooCommerce_Custom_Orders_Table::get_postmeta_mapping() as $column => $meta_key ) {
-				delete_post_meta( $refund->get_id(), $meta_key );
+				wc_delete_order_item_meta( $refund->get_id(), $meta_key );
 			}
 		}
 	}

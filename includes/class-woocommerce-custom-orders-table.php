@@ -174,7 +174,7 @@ class WooCommerce_Custom_Orders_Table {
 	 */
 	public static function populate_order_from_post_meta( $order ) {
 		foreach ( self::get_postmeta_mapping() as $column => $meta_key ) {
-			$meta = get_post_meta( $order->get_id(), $meta_key, true );
+			$meta = wc_get_order_item_meta( $order->get_id(), $meta_key, true );
 
 			$table_data = $order->get_data_store()->get_order_data_from_table( $order );
 			if ( empty( $table_data->$column ) && ! empty( $meta ) ) {
